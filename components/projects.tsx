@@ -37,7 +37,7 @@ const projects = [
     title: "StreamFlix",
     description:
       "A movie-streaming platform where studios and creators upload movies, and viewers can watch and enjoy them online.",
-    image: "/images/kudora.png",
+    image: "/images/Streamflix.png",
     tech: ["React.js", "TypeScript", "Tailwind CSS"],
     category: "Streaming Platform",
     status: "In Progress",
