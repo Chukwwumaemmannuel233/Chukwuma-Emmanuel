@@ -14,39 +14,39 @@ import { ExternalLink } from "lucide-react";
 
 const projects = [
   {
-    title: "Admin-Dashboard App",
+    title: "EmmaTech",
     description:
-      "A sleek admin dashboard for managing e-commerce sales, inventory, users, and orders in real time.",
-    image: "/images/admin-dashboard.png",
-    tech: ["Next.js", "TypeScript", "Tailwind CSS", "Chart.js"],
-    category: "Template",
+      "A tech company that builds modern web applications, offers web development services, and provides client consultations.",
+    image: "/images/emmatech.png",
+    tech: ["React.js", "TypeScript", "Tailwind CSS", "OpenAI", "Vercel"],
+    category: "Company Website",
     status: "Completed",
-    liveUrl: "https://admin-dashboard-alpha-sand.vercel.app",
+    liveUrl: "https://emma-tech.vercel.app/",
   },
   {
-    title: "Job-Board App",
+    title: "KAV Textiles",
     description:
-      "Cross-platform job board where people can find and apply for jobs and employers can post openings.",
-    image: "/images/johub.png",
-    tech: ["Next.js", "TypeScript", "Tailwind CSS"],
-    category: "Web Platform",
+      "An e-commerce website for a textile company that sells all types of fabrics and materials online.",
+    image: "/images/kavtextiles.png",
+    tech: ["React.js", "TypeScript", "Tailwind CSS"],
+    category: "E-commerce",
     status: "Completed",
-    liveUrl: "https://job-board-app-black.vercel.app",
+    liveUrl: "https://kav-tetxtiles.vercel.app/",
   },
   {
-    title: "Video Streaming Platform",
+    title: "StreamFlix",
     description:
-      "A fast, responsive movie-streaming site that works seamlessly on both phones and computers.",
-    image: "/images/Streamflix.png",
-    tech: ["React", "Next.js", "TypeScript", "Tailwind CSS"],
-    category: "Web Platform",
-    status: "Completed",
-    liveUrl: "https://video-streaming-rose.vercel.app",
+      "A movie-streaming platform where studios and creators upload movies, and viewers can watch and enjoy them online.",
+    image: "/images/streamflix.png",
+    tech: ["React.js", "TypeScript", "Tailwind CSS"],
+    category: "Streaming Platform",
+    status: "In Progress",
+    liveUrl: "https://streamflix-app-rho.vercel.app/",
   },
   {
     title: "Kudora",
     description:
-      "An e-commerce platform for buying and selling products with secure checkout and modern UI.",
+      "An e-commerce platform for buying and selling products with a secure and modern shopping experience.",
     image: "/images/Kudora.png",
     tech: ["Next.js", "TypeScript", "Prisma", "Node.js", "PostgreSQL"],
     category: "Web Platform",
@@ -54,6 +54,7 @@ const projects = [
     liveUrl: "https://kudora.vercel.app",
   },
 ];
+
 
 export default function Projects() {
   const sectionRef = useRef<HTMLElement>(null);
