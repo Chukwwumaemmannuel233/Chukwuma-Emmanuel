@@ -36,7 +36,7 @@ export default function Header() {
   ];
 
   return (
-    <header className="fixed top-0 left-0 w-full z-50 bg-gradient-to-r from-gray-900/90 via-gray-800/90 to-gray-900/90 backdrop-blur-md border-b border-gray-800">
+    <header className="fixed top-0 left-0 w-full z-50 bg-gray-950 border-b border-gray-800">
       <div className="max-w-screen-xl mx-auto px-4 flex items-center justify-between h-16 overflow-visible">
         {/* Logo */}
         <motion.div
@@ -117,23 +117,68 @@ export default function Header() {
       {/* Mobile Nav */}
       <AnimatePresence>
         {open && (
-          <motion.nav
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            className="lg:hidden bg-gray-900/95 border-t border-gray-800 px-4 py-4 space-y-4 overflow-x-hidden"
-          >
-            {[...mainLinks, ...extraLinks].map((link) => (
-              <Link
-                key={link.name}
-                href={link.href}
-                onClick={() => setOpen(false)}
-                className="block text-gray-300 hover:text-blue-400 transition-colors"
-              >
-                {link.name}
-              </Link>
-            ))}
-          </motion.nav>
+          <>
+            {/* Overlay */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 0.7 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className="fixed inset-0 bg-black z-40"
+              onClick={() => setOpen(false)}
+            />
+
+            {/* Sidebar */}
+            <motion.nav
+              initial={{ x: "100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "100%" }}
+              transition={{ duration: 0.3, ease: "easeInOut" }}
+              className="fixed top-0 right-0 h-full w-72 bg-gray-950 border-l border-gray-800 px-6 py-6 z-50 lg:hidden flex flex-col"
+            >
+              {/* Top (Logo + Close) */}
+              <div className="flex items-center justify-between mb-8">
+                <div className="text-white font-bold text-lg tracking-wide">
+                  CUE Portfolio
+                </div>
+
+                <button
+                  onClick={() => setOpen(false)}
+                  className="p-2 rounded hover:bg-gray-800 text-gray-300 hover:text-white"
+                >
+                  <X className="w-6 h-6" />
+                </button>
+              </div>
+
+              {/* Divider */}
+              <div className="border-b border-gray-800 mb-6" />
+
+              {/* Links */}
+              <div className="flex flex-col space-y-5">
+                {[...mainLinks, ...extraLinks].map((link, i) => (
+                  <motion.div
+                    key={link.name}
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: i * 0.05 }}
+                  >
+                    <Link
+                      href={link.href}
+                      onClick={() => setOpen(false)}
+                      className="text-gray-300 text-lg hover:text-blue-400 transition-all duration-200 hover:translate-x-1"
+                    >
+                      {link.name}
+                    </Link>
+                  </motion.div>
+                ))}
+              </div>
+
+              {/* Bottom section (optional branding) */}
+              <div className="mt-auto pt-10 text-sm text-gray-500">
+                © 2024 CUE
+              </div>
+            </motion.nav>
+          </>
         )}
       </AnimatePresence>
     </header>

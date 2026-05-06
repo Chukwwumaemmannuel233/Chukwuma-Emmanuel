@@ -1,39 +1,48 @@
-"use client"
+"use client";
 
-import type React from "react"
+import type React from "react";
 
-import { useState, useEffect } from "react"
-import { motion, AnimatePresence } from "framer-motion"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { Label } from "@/components/ui/label"
-import { Button } from "@/components/ui/button"
-import { Mail, Phone, MapPin, Send, CheckCircle, XCircle } from "lucide-react"
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Label } from "@/components/ui/label";
+import { Button } from "@/components/ui/button";
+import { Mail, Phone, MapPin, Send, CheckCircle, XCircle } from "lucide-react";
 // import { useToast } from "@/hooks/use-toast"
 
 export default function Contact() {
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [message, setMessage] = useState<{ type: "success" | "error"; text: string } | null>(null)
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [message, setMessage] = useState<{
+    type: "success" | "error";
+    text: string;
+  } | null>(null);
   // const { toast } = useToast()
 
   useEffect(() => {
     if (message) {
       const timer = setTimeout(() => {
-        setMessage(null)
-      }, 5000)
-      return () => clearTimeout(timer)
+        setMessage(null);
+      }, 5000);
+      return () => clearTimeout(timer);
     }
-  }, [message])
+  }, [message]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    setIsSubmitting(true)
-    setMessage(null)
+    e.preventDefault();
+    setIsSubmitting(true);
+    setMessage(null);
 
-    const form = e.currentTarget
+    const form = e.currentTarget;
 
-    const formData = new FormData(e.currentTarget)
+    const formData = new FormData(e.currentTarget);
     const data = {
       name: formData.get("name"),
       email: formData.get("email"),
@@ -41,40 +50,40 @@ export default function Contact() {
       projectType: formData.get("projectType"),
       subject: formData.get("subject"),
       message: formData.get("message"),
-    }
+    };
 
     try {
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
-      })
+      });
 
-      if (!res.ok) throw new Error("Failed")
+      if (!res.ok) throw new Error("Failed");
 
       setMessage({
         type: "success",
         text: "Message sent successfully! Thanks for reaching out. I'll reply within 24 hours.",
-      })
+      });
     } catch {
       setMessage({
         type: "error",
         text: "Failed to send message. Please try again or email me directly.",
-      })
+      });
     } finally {
-      setIsSubmitting(false)
+      setIsSubmitting(false);
 
       if (form) {
-        form.reset()
+        form.reset();
 
         // Clear select elements specifically
-        const selects = form.querySelectorAll("select")
+        const selects = form.querySelectorAll("select");
         selects.forEach((select: HTMLSelectElement) => {
-          select.value = ""
-        })
+          select.value = "";
+        });
       }
     }
-  }
+  };
 
   return (
     <section id="contact" className="py-20 px-4 bg-gray-900 relative">
@@ -142,9 +151,12 @@ export default function Contact() {
             className="space-y-8"
           >
             <div>
-              <h3 className="text-2xl font-semibold text-white mb-6">Get in Touch</h3>
+              <h3 className="text-2xl font-semibold text-white mb-6">
+                Get in Touch
+              </h3>
               <p className="text-gray-300 leading-relaxed mb-8">
-                I’m open to collaborations, freelance work, or just a friendly chat about tech.
+                I’m open to collaborations, freelance work, or just a friendly
+                chat about tech.
               </p>
             </div>
 
@@ -161,7 +173,21 @@ export default function Contact() {
                 value="+234 816 177 0490"
                 link="tel:+2348161770490"
               />
-              <ContactInfo icon={<MapPin className="w-6 h-6 text-white" />} label="Location" value="Enugu, Nigeria" />
+              <ContactInfo
+                icon={<MapPin className="w-6 h-6 text-white" />}
+                label="Location"
+                value="Enugu, Nigeria"
+              />
+
+              <div className="mt-6 rounded-xl overflow-hidden border border-gray-700">
+                <iframe
+                  src="https://www.google.com/maps?q=Gariki,+Enugu,+Nigeria&output=embed"
+                  width="100%"
+                  height="220"
+                  loading="lazy"
+                  className="w-full"
+                />
+              </div>
             </div>
           </motion.div>
 
@@ -175,13 +201,20 @@ export default function Contact() {
               <CardHeader>
                 <CardTitle className="text-white">Send a Message</CardTitle>
                 <CardDescription className="text-gray-400">
-                  Tell me about your project or just say hello. I'll get back to you soon!
+                  Tell me about your project or just say hello. I'll get back to
+                  you soon!
                 </CardDescription>
               </CardHeader>
               <CardContent>
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div className="grid md:grid-cols-2 gap-4">
-                    <FormField name="name" type="text" label="Name *" placeholder="Your full name" required />
+                    <FormField
+                      name="name"
+                      type="text"
+                      label="Name *"
+                      placeholder="Your full name"
+                      required
+                    />
                     <FormField
                       name="email"
                       type="email"
@@ -202,10 +235,22 @@ export default function Contact() {
                     name="projectType"
                     label="Project Type *"
                     required
-                    options={["Website", "Mobile App", "UI/UX Design", "Full-stack Development", "Other"]}
+                    options={[
+                      "Website",
+                      "Mobile App",
+                      "UI/UX Design",
+                      "Full-stack Development",
+                      "Other",
+                    ]}
                   />
 
-                  <FormField name="subject" type="text" label="Subject *" placeholder="What's this about?" required />
+                  <FormField
+                    name="subject"
+                    type="text"
+                    label="Subject *"
+                    placeholder="What's this about?"
+                    required
+                  />
 
                   <div className="space-y-2">
                     <Label htmlFor="message" className="text-gray-300">
@@ -240,7 +285,7 @@ export default function Contact() {
         </div>
       </div>
     </section>
-  )
+  );
 }
 
 function ContactInfo({
@@ -248,7 +293,12 @@ function ContactInfo({
   label,
   value,
   link,
-}: { icon: React.ReactNode; label: string; value: string; link?: string }) {
+}: {
+  icon: React.ReactNode;
+  label: string;
+  value: string;
+  link?: string;
+}) {
   return (
     <div
       className="flex items-center space-x-4 p-4 bg-gray-800/50 rounded-lg border border-gray-700 
@@ -260,7 +310,10 @@ function ContactInfo({
       <div>
         <p className="text-gray-400 text-sm">{label}</p>
         {link ? (
-          <a href={link} className="text-white hover:text-blue-400 transition-colors">
+          <a
+            href={link}
+            className="text-white hover:text-blue-400 transition-colors"
+          >
             {value}
           </a>
         ) : (
@@ -268,7 +321,7 @@ function ContactInfo({
         )}
       </div>
     </div>
-  )
+  );
 }
 
 function FormField({
@@ -278,11 +331,11 @@ function FormField({
   placeholder,
   required = false,
 }: {
-  name: string
-  type: string
-  label: string
-  placeholder: string
-  required?: boolean
+  name: string;
+  type: string;
+  label: string;
+  placeholder: string;
+  required?: boolean;
 }) {
   return (
     <div className="space-y-2">
@@ -298,7 +351,7 @@ function FormField({
         className="bg-gray-900 border border-gray-600 text-white focus:border-blue-500"
       />
     </div>
-  )
+  );
 }
 
 function SelectField({
@@ -307,10 +360,10 @@ function SelectField({
   options,
   required = false,
 }: {
-  name: string
-  label: string
-  options: string[]
-  required?: boolean
+  name: string;
+  label: string;
+  options: string[];
+  required?: boolean;
 }) {
   return (
     <div className="space-y-2">
@@ -329,5 +382,5 @@ function SelectField({
         ))}
       </select>
     </div>
-  )
+  );
 }

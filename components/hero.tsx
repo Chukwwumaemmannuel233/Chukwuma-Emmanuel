@@ -14,12 +14,12 @@ import { useEffect, useState } from "react";
 
 export default function Hero() {
   const words = [
-    "Full-Stack Developer",
-    "Problem Solver",
-    "Team Player",
-    "Good Communicator",
-    "Creative Thinker",
-  ];
+  "Full-Stack Developer",
+  "Problem Solver",
+  "System Thinker",
+  "Team Player",
+  "Clear Communicator",
+];
 
   const [index, setIndex] = useState(0);
   const [subIndex, setSubIndex] = useState(0);

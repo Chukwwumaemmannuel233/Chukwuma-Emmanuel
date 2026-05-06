@@ -14,7 +14,7 @@ export default function Education() {
     <section
       id="education"
       // 🌟 New background: soft gradient from slate to indigo
-      className="py-20 px-4 bg-gradient-to-br from-slate-900 via-indigo-900 to-blue-900 overflow-hidden"
+      className="py-20 px-4 bg-gray-900 overflow-hidden"
     >
       <div className="max-w-3xl mx-auto">
         {/* Section Title */}

@@ -52,35 +52,44 @@ export default function About() {
             <h3 className="text-2xl font-bold text-white">
               Full-Stack & React Native Developer
             </h3>
+
             <p className="leading-relaxed text-base">
-              Hi, I'm <span className="text-blue-400 font-medium">Chukwuma Ugwu Emmanuel</span>.  
-              I began as a frontend developer building responsive web apps with{" "}
-              <span className="text-purple-400">React, Next.js, TypeScript, and Tailwind</span>.  
-              Over time, I transitioned into a full-stack role, adding{" "}
-              <span className="text-green-400">Node.js and PostgreSQL</span> to my toolkit, and I now build 
-              robust back-end APIs and full solutions.
-            </p>
-            <p className="leading-relaxed text-base">
-              Recently, I’ve expanded into{" "}
-              <span className="text-cyan-400 font-medium">React Native</span>, creating cross-platform mobile 
-              apps that share logic with the web. I love solving real-world problems, writing clean code, 
-              and shipping production-ready products.
+              I build fast, responsive, and scalable web applications, focusing
+              on clean user interfaces and efficient backend systems.
             </p>
 
-            {/* Stats Grid with Hover */}
+            <p className="leading-relaxed text-base">
+              I work with{" "}
+              <span className="text-blue-400 font-medium">
+                React, Next.js, TypeScript, and Tailwind CSS
+              </span>{" "}
+              for frontend development, and{" "}
+              <span className="text-blue-400 font-medium">
+                Node.js, Express, and PostgreSQL
+              </span>{" "}
+              to build APIs, manage data, and power full-stack applications.
+            </p>
+
+            <p className="leading-relaxed text-base">
+              I’ve built dashboards, web apps, and backend systems, and I focus
+              on solving real-world problems, fixing bugs, and delivering
+              reliable products.
+            </p>
+
+            {/* Stats */}
             <div className="grid grid-cols-2 gap-6 pt-4">
               {[
-                { title: "Experience", value: "3+ Years", color: "blue" },
-                { title: "Projects", value: "10+ Completed", color: "purple" },
-                { title: "Specialization", value: "Full Stack Developer", color: "green" },
-                { title: "Availability", value: "Open to Work", color: "pink" },
+                { title: "Experience", value: "3+ Years" },
+                { title: "Projects", value: "10+ Completed" },
+                { title: "Focus", value: "Full Stack Development" },
+                { title: "Status", value: "Open to Work" },
               ].map((item, i) => (
                 <motion.div
                   key={i}
-                  whileHover={{ scale: 1.05, boxShadow: "0 0 15px rgba(59,130,246,0.4)" }}
-                  className="bg-gray-800/60 p-4 rounded-lg border border-gray-700 text-center transition-colors"
+                  whileHover={{ scale: 1.05 }}
+                  className="bg-gray-800 p-4 rounded-lg border border-gray-700 text-center hover:border-blue-500 hover:shadow-[0_0_15px_rgba(59,130,246,0.3)] transition"
                 >
-                  <h4 className={`font-semibold text-${item.color}-400 mb-1 text-sm`}>
+                  <h4 className="font-semibold text-blue-400 mb-1 text-sm">
                     {item.title}
                   </h4>
                   <p className="text-gray-200 text-sm">{item.value}</p>

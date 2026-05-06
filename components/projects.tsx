@@ -31,7 +31,7 @@ const projects = [
     tech: ["React.js", "TypeScript", "Tailwind CSS"],
     category: "E-commerce",
     status: "Completed",
-    liveUrl: "https://kav-tetxtiles.vercel.app/",
+    liveUrl: "https://kav-textile.vercel.app/",
   },
   {
     title: "StreamFlix",
@@ -55,16 +55,11 @@ const projects = [
   },
 ];
 
-
 export default function Projects() {
   const sectionRef = useRef<HTMLElement>(null);
 
   return (
-    <section
-      ref={sectionRef}
-      id="projects"
-      className="py-20 px-6 bg-gray-900"
-    >
+    <section ref={sectionRef} id="projects" className="py-20 px-6 bg-gray-900">
       <div className="max-w-7xl mx-auto">
         {/* Section header */}
         <motion.div
@@ -78,12 +73,13 @@ export default function Projects() {
             Featured Projects
           </h2>
           <p className="text-gray-400 mt-4 max-w-2xl mx-auto">
-            A selection of recent projects showcasing my frontend and full-stack development skills.
+            A selection of recent projects showcasing my frontend and full-stack
+            development skills.
           </p>
         </motion.div>
 
         {/* Projects grid */}
-        <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
           {projects.map((project, index) => (
             <motion.div
               key={index}
@@ -92,27 +88,32 @@ export default function Projects() {
               transition={{ duration: 0.6, delay: index * 0.1 }}
               viewport={{ once: true }}
             >
-              <Card className="group overflow-hidden rounded-2xl bg-gray-800 border border-gray-700 hover:border-blue-500/50 transition-colors">
-                <div className="relative">
+              <Card className="group overflow-hidden rounded-lg bg-gray-800 border border-gray-700 hover:border-blue-500/60 transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/10">
+                {/* Image */}
+                <div className="relative overflow-hidden">
                   <img
                     src={project.image}
                     alt={project.title}
-                    className="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-105"
+                    className="w-full h-44 object-cover transition-transform duration-500 group-hover:scale-105"
                   />
+
                   <span
-                    className={`absolute top-4 right-4 px-2 py-1 text-xs rounded-full font-semibold ${
+                    className={`absolute top-3 right-3 px-2 py-1 text-xs rounded-md font-medium ${
                       project.status === "Completed"
-                        ? "bg-green-500/20 text-green-400"
-                        : "bg-yellow-500/20 text-yellow-400"
+                        ? "bg-green-500/15 text-green-400"
+                        : "bg-yellow-500/15 text-yellow-400"
                     }`}
                   >
                     {project.status}
                   </span>
                 </div>
 
-                <CardHeader className="pt-6">
-                  <CardTitle className="text-white text-xl">{project.title}</CardTitle>
-                  <CardDescription className="text-blue-400 text-sm">
+                {/* Content */}
+                <CardHeader className="pt-5 pb-2">
+                  <CardTitle className="text-white text-lg font-semibold">
+                    {project.title}
+                  </CardTitle>
+                  <CardDescription className="text-blue-400 text-xs uppercase tracking-wide">
                     {project.category}
                   </CardDescription>
                 </CardHeader>
@@ -121,31 +122,32 @@ export default function Projects() {
                   <p className="text-gray-300 text-sm mb-4 leading-relaxed">
                     {project.description}
                   </p>
-                  <div className="flex flex-wrap gap-2 mb-6">
+
+                  {/* Tech stack */}
+                  <div className="flex flex-wrap gap-2 mb-5">
                     {project.tech.map((tech) => (
                       <span
                         key={tech}
-                        className="px-2 py-1 text-xs rounded-full bg-gray-700 text-gray-300"
+                        className="px-2 py-1 text-[11px] rounded-md bg-gray-700 text-gray-300"
                       >
                         {tech}
                       </span>
                     ))}
                   </div>
 
-                  {/* Live Demo Button with your theme */}
+                  {/* Button */}
                   <Button
                     size="sm"
-                    variant="outline"
                     className="
-                      w-full
-                      border-gray-600
-                      text-gray-200
-                      bg-transparent
-                      hover:bg-gray-700
-                      hover:text-white
-                      hover:border-blue-400
-                      transition-colors
-                    "
+              w-full
+              bg-gray-900
+              border border-gray-600
+              text-gray-200
+              hover:bg-gray-700
+              hover:border-blue-400
+              hover:text-white
+              transition-all
+            "
                     onClick={() => window.open(project.liveUrl, "_blank")}
                   >
                     <ExternalLink className="w-4 h-4 mr-2" />

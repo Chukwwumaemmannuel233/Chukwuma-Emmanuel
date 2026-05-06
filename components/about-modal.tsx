@@ -19,95 +19,117 @@ export default function AboutModal() {
         <Button
           variant="ghost"
           className="
-    border border-gray-600 
-    text-gray-300 
-    bg-transparent
-    hover:border-blue-500
-    hover:text-white
-    hover:bg-gradient-to-r hover:from-blue-600 hover:to-purple-600
-    transition-all duration-300
-    rounded-md px-5 py-2
-  "
+            border border-gray-700 
+            text-gray-300 
+            hover:border-blue-500
+            hover:text-white
+            hover:bg-blue-600/10
+            transition-all duration-300
+            rounded-md px-5 py-2
+          "
         >
           Learn More About Me
         </Button>
       </DialogTrigger>
 
-      <DialogContent className="bg-gray-900 border-gray-700 text-gray-300 max-w-2xl max-h-[80vh] overflow-y-auto">
+      <DialogContent className="bg-gray-950 border border-gray-800 text-gray-300 max-w-2xl max-h-[85vh] overflow-y-auto rounded-xl">
         <DialogHeader>
-          <DialogTitle className="text-2xl bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-            More About Chukwuma Ugwu Emmanuel
+          <DialogTitle className="text-2xl text-white">
+            About Me
           </DialogTitle>
-          <DialogDescription className="text-gray-400">
-            My journey from frontend to full-stack and mobile development.
+          <DialogDescription className="text-gray-500">
+            Full-stack developer focused on building real-world solutions.
           </DialogDescription>
         </DialogHeader>
 
-        <div className="space-y-6 mt-6 text-sm leading-relaxed">
+        <div className="space-y-8 mt-6 text-sm leading-relaxed">
+
+          {/* Career */}
           <div className="space-y-3">
             <h3 className="text-lg font-semibold text-blue-400 flex items-center">
               <Rocket className="w-5 h-5 mr-2" />
-              Career Path
+              Journey
             </h3>
+
             <p>
-              I started as a frontend developer in 2021, building React/Next.js
-              web applications. With time I embraced back-end technologies like
-              Node.js and PostgreSQL, becoming a full-stack developer. Recently,
-              I added React Native to create cross-platform mobile apps.
+              I started with frontend development, building responsive interfaces
+              using React and Next.js. Over time, I moved into backend development,
+              working with Node.js and PostgreSQL to build complete, scalable applications.
             </p>
-            <div className="grid grid-cols-2 gap-4 text-gray-400">
-              <div className="flex items-center space-x-2">
+
+            <p>
+              Today, I work across the full stack and also build mobile apps with
+              React Native, focusing on performance, clean architecture, and usability.
+            </p>
+
+            <div className="flex flex-wrap gap-6 text-gray-400 pt-2">
+              <div className="flex items-center gap-2">
                 <Calendar className="w-4 h-4" />
-                <span>Started: 2021</span>
+                <span>Since 2021</span>
               </div>
-              <div className="flex items-center space-x-2">
+
+              <div className="flex items-center gap-2">
                 <MapPin className="w-4 h-4" />
-                <span>Based in Nigeria</span>
+                <span>Nigeria</span>
               </div>
             </div>
           </div>
 
+          {/* Stack */}
           <div className="space-y-3">
-            <h3 className="text-lg font-semibold text-green-400 flex items-center">
+            <h3 className="text-lg font-semibold text-blue-400 flex items-center">
               <Code className="w-5 h-5 mr-2" />
               Tech Stack
             </h3>
+
             <p>
-              Proficient with React, Next.js, TypeScript, Node.js, Express, and
-              PostgreSQL. For mobile, I build with React Native and Expo,
-              sharing logic across web and mobile for efficiency.
+              I build user interfaces with React, Next.js, TypeScript, and Tailwind CSS,
+              and handle backend logic using Node.js, Express, and PostgreSQL.
+              I also develop cross-platform mobile apps with React Native.
             </p>
+
+            <div className="flex flex-wrap gap-2 pt-2">
+              {[
+                "React",
+                "Next.js",
+                "TypeScript",
+                "Tailwind",
+                "Node.js",
+                "Express",
+                "PostgreSQL",
+                "React Native",
+              ].map((tech) => (
+                <Badge
+                  key={tech}
+                  className="bg-blue-500/10 text-blue-400 border border-blue-500/20"
+                >
+                  {tech}
+                </Badge>
+              ))}
+            </div>
           </div>
 
+          {/* Focus */}
           <div className="space-y-3">
-            <h3 className="text-lg font-semibold text-purple-400">
-              Current Focus
+            <h3 className="text-lg font-semibold text-blue-400">
+              What I Focus On
             </h3>
+
             <div className="flex flex-wrap gap-2">
-              <Badge
-                variant="secondary"
-                className="bg-blue-500/20 text-blue-400"
-              >
-                Advanced React
-              </Badge>
-              <Badge
-                variant="secondary"
-                className="bg-green-500/20 text-green-400"
-              >
-                Node & APIs
-              </Badge>
-              <Badge
-                variant="secondary"
-                className="bg-pink-500/20 text-pink-400"
-              >
-                React Native
-              </Badge>
-              <Badge
-                variant="secondary"
-                className="bg-cyan-500/20 text-cyan-400"
-              >
-                Performance
-              </Badge>
+              {[
+                "Clean UI & UX",
+                "Scalable APIs",
+                "Performance Optimization",
+                "Bug Fixing & Debugging",
+                "Production-ready Code",
+              ].map((item) => (
+                <Badge
+                  key={item}
+                  className="bg-gray-800 text-gray-300 border border-gray-700 hover:border-blue-500 transition"
+                >
+                  {item}
+                </Badge>
+              ))}
             </div>
           </div>
         </div>

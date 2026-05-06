@@ -23,44 +23,75 @@ const services = [
     icon: Code,
     title: "Frontend Development",
     description:
-      "Responsive, performant web applications built with React, Next.js, and TypeScript using modern best practices.",
-    features: ["React & Next.js", "TypeScript", "Responsive Design", "Performance Optimization"],
+      "I build fast, responsive, and accessible web interfaces using modern React ecosystems with a strong focus on performance and UX.",
+    features: [
+      "React & Next.js Applications",
+      "TypeScript Architecture",
+      "Responsive UI Systems",
+      "Performance Optimization",
+    ],
   },
   {
     icon: Smartphone,
     title: "Mobile App Development",
     description:
-      "Cross-platform mobile apps for iOS and Android using React Native with native-like performance.",
-    features: ["React Native", "Cross-platform", "Native Performance", "App Store Deployment"],
+      "I develop cross-platform mobile applications with React Native, focusing on smooth UX and native-like performance.",
+    features: [
+      "React Native Development",
+      "iOS & Android Support",
+      "Reusable Code Architecture",
+      "App Store Deployment",
+    ],
   },
   {
     icon: Globe,
-    title: "Full-Stack Web Development",
+    title: "Full-Stack Development",
     description:
-      "From frontend to backend and deployment, delivering secure and scalable web solutions.",
-    features: ["API Integration", "Database Design", "Cloud Deployment", "Security Best Practices"],
+      "I design and build complete web applications, from frontend interfaces to backend APIs and database systems.",
+    features: [
+      "REST API Development",
+      "Database Design (PostgreSQL)",
+      "Authentication & Security",
+      "Cloud Deployment",
+    ],
   },
   {
     icon: TerminalSquare,
-    title: "Development Tools",
-    description: "Key tools I use every day to build and ship projects efficiently.",
-    features: ["VS Code", "Postman", "Namecheap", "Git & GitHub"],
+    title: "Development Workflow",
+    description:
+      "I use modern tools and workflows to build, test, and ship scalable applications efficiently.",
+    features: [
+      "Git & GitHub Version Control",
+      "API Testing (Postman)",
+      "Clean Code Practices",
+      "Project Structuring",
+    ],
   },
   {
     icon: Users,
-    title: "Team Collaboration",
+    title: "Collaboration",
     description:
-      "Strong communication and agile teamwork for smooth project delivery.",
-    features: ["Scrum/Agile", "Git Workflow", "Code Reviews", "Jira/Trello"],
+      "I work effectively in team environments, contributing through communication, code reviews, and agile workflows.",
+    features: [
+      "Agile/Scrum Workflow",
+      "Code Reviews",
+      "Team Communication",
+      "Task Management Tools",
+    ],
   },
   {
     icon: Zap,
-    title: "Performance Optimization",
+    title: "Performance Engineering",
     description:
-      "Improving speed, SEO, and user experience with advanced optimization techniques.",
-    features: ["Core Web Vitals", "SEO", "Bundle Optimization", "Caching Strategies"],
+      "I optimize applications for speed, scalability, and search visibility to ensure production-ready quality.",
+    features: [
+      "Core Web Vitals Optimization",
+      "SEO Best Practices",
+      "Bundle Optimization",
+      "Caching Strategies",
+    ],
   },
-]
+];
 
 export default function Services() {
   const sectionRef = useRef<HTMLElement>(null)
