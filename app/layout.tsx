@@ -14,11 +14,11 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Ugwu Chukwuma Emmanuel – Frontend Developer",
+  title: "Ugwu Chukwuma Emmanuel - Full-Stack Developer",
   description:
-    "I'm a passionate frontend developer skilled in HTML, CSS, JavaScript, React, and TypeScript. I build fast, responsive, and user-friendly websites and web apps that solve real-world problems.",
+    "Full-stack developer building fast, responsive, and user-friendly web and mobile applications with React, Next.js, TypeScript, Node.js, and PostgreSQL.",
   icons: {
-        icon: "/favicon.png",
+    icon: "/favicon.png",
   },
 };
 
@@ -32,7 +32,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased overflow-x-hidden`}
       >
-         <Header />
+        <Header />
         {children}
       </body>
     </html>

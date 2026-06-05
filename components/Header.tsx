@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect, useRef } from "react";
-import { Menu, X, ChevronDown } from "lucide-react";
+import { Menu, X, ChevronDown, Download } from "lucide-react";
 
 export default function Header() {
   const [open, setOpen] = useState(false);
@@ -16,6 +16,7 @@ export default function Header() {
         setMoreOpen(false);
       }
     }
+
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
@@ -36,9 +37,8 @@ export default function Header() {
   ];
 
   return (
-    <header className="fixed top-0 left-0 w-full z-50 bg-gray-950 border-b border-gray-800">
-      <div className="max-w-screen-xl mx-auto px-4 flex items-center justify-between h-16 overflow-visible">
-        {/* Logo */}
+    <header className="fixed left-0 top-0 z-50 w-full border-b border-white/10 bg-[#080b12]/85 backdrop-blur-xl">
+      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6">
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -46,14 +46,14 @@ export default function Header() {
         >
           <Link
             href="/"
-            className="w-10 h-10 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg flex items-center justify-center"
+            className="flex h-10 w-10 items-center justify-center rounded-lg bg-teal-400 shadow-lg shadow-teal-500/20"
+            aria-label="Go to home"
           >
-            <span className="text-white font-bold text-sm">CUE</span>
+            <span className="text-sm font-black text-slate-950">CUE</span>
           </Link>
         </motion.div>
 
-        {/* Desktop Navigation */}
-        <nav className="hidden lg:flex space-x-8 items-center relative z-50">
+        <nav className="relative z-50 hidden items-center gap-1 rounded-full border border-white/10 bg-white/[0.03] p-1 lg:flex">
           {mainLinks.map((link, i) => (
             <motion.div
               key={link.name}
@@ -63,21 +63,20 @@ export default function Header() {
             >
               <Link
                 href={link.href}
-                className="text-gray-300 hover:text-blue-400 transition-colors"
+                className="rounded-full px-4 py-2 text-sm text-slate-300 transition-colors hover:bg-white/10 hover:text-white"
               >
                 {link.name}
               </Link>
             </motion.div>
           ))}
 
-          {/* More Dropdown */}
           <div ref={moreRef} className="relative z-50">
             <button
               onClick={() => setMoreOpen((o) => !o)}
-              className="flex items-center text-gray-300 hover:text-blue-400"
+              className="flex items-center rounded-full px-4 py-2 text-sm text-slate-300 hover:bg-white/10 hover:text-white"
             >
               More
-              <ChevronDown className="ml-1 w-4 h-4" />
+              <ChevronDown className="ml-1 h-4 w-4" />
             </button>
             <AnimatePresence>
               {moreOpen && (
@@ -86,16 +85,16 @@ export default function Header() {
                   animate={{ opacity: 1, scale: 1, y: 0 }}
                   exit={{ opacity: 0, scale: 0.95, y: -10 }}
                   transition={{ duration: 0.2, ease: "easeOut" }}
-                  className="absolute right-0 mt-2 min-w-max bg-gray-800 border border-gray-700 rounded shadow-lg z-50"
+                  className="absolute right-0 z-50 mt-3 min-w-max overflow-hidden rounded-lg border border-white/10 bg-[#111827] shadow-2xl shadow-black/40"
                 >
-                  {extraLinks.map((l) => (
+                  {extraLinks.map((link) => (
                     <Link
-                      key={l.name}
-                      href={l.href}
-                      className="block px-4 py-2 text-gray-300 hover:bg-gray-700 hover:text-blue-400"
+                      key={link.name}
+                      href={link.href}
+                      className="block px-4 py-2.5 text-sm text-slate-300 hover:bg-white/10 hover:text-teal-300"
                       onClick={() => setMoreOpen(false)}
                     >
-                      {l.name}
+                      {link.name}
                     </Link>
                   ))}
                 </motion.div>
@@ -104,56 +103,60 @@ export default function Header() {
           </div>
         </nav>
 
-        {/* Mobile Menu Toggle */}
+        <a
+          href="/Chukwuma-Emmanuel-CV.pdf"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="hidden h-10 items-center gap-2 rounded-md bg-teal-400 px-4 text-sm font-semibold text-slate-950 transition hover:bg-teal-300 lg:inline-flex"
+        >
+          <Download className="h-4 w-4" />
+          CV
+        </a>
+
         <button
           onClick={() => setOpen(!open)}
-          className="lg:hidden p-2 text-gray-300 hover:text-blue-400"
+          className="p-2 text-slate-300 hover:text-teal-300 lg:hidden"
           aria-label="Toggle Menu"
         >
-          {open ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
         </button>
       </div>
 
-      {/* Mobile Nav */}
       <AnimatePresence>
         {open && (
           <>
-            {/* Overlay */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 0.7 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.2 }}
-              className="fixed inset-0 bg-black z-40"
+              className="fixed inset-0 z-40 bg-black"
               onClick={() => setOpen(false)}
             />
 
-            {/* Sidebar */}
             <motion.nav
               initial={{ x: "100%" }}
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ duration: 0.3, ease: "easeInOut" }}
-              className="fixed top-0 right-0 h-full w-72 bg-gray-950 border-l border-gray-800 px-6 py-6 z-50 lg:hidden flex flex-col"
+              className="fixed right-0 top-0 z-50 flex h-full w-72 flex-col border-l border-white/10 bg-[#080b12] px-6 py-6 lg:hidden"
             >
-              {/* Top (Logo + Close) */}
-              <div className="flex items-center justify-between mb-8">
-                <div className="text-white font-bold text-lg tracking-wide">
+              <div className="mb-8 flex items-center justify-between">
+                <div className="text-lg font-bold tracking-wide text-white">
                   CUE Portfolio
                 </div>
 
                 <button
                   onClick={() => setOpen(false)}
-                  className="p-2 rounded hover:bg-gray-800 text-gray-300 hover:text-white"
+                  className="rounded p-2 text-slate-300 hover:bg-white/10 hover:text-white"
+                  aria-label="Close menu"
                 >
-                  <X className="w-6 h-6" />
+                  <X className="h-6 w-6" />
                 </button>
               </div>
 
-              {/* Divider */}
-              <div className="border-b border-gray-800 mb-6" />
+              <div className="mb-6 border-b border-white/10" />
 
-              {/* Links */}
               <div className="flex flex-col space-y-5">
                 {[...mainLinks, ...extraLinks].map((link, i) => (
                   <motion.div
@@ -165,7 +168,7 @@ export default function Header() {
                     <Link
                       href={link.href}
                       onClick={() => setOpen(false)}
-                      className="text-gray-300 text-lg hover:text-blue-400 transition-all duration-200 hover:translate-x-1"
+                      className="text-lg text-slate-300 transition-all duration-200 hover:translate-x-1 hover:text-teal-300"
                     >
                       {link.name}
                     </Link>
@@ -173,9 +176,18 @@ export default function Header() {
                 ))}
               </div>
 
-              {/* Bottom section (optional branding) */}
-              <div className="mt-auto pt-10 text-sm text-gray-500">
-                © 2024 CUE
+              <a
+                href="/Chukwuma-Emmanuel-CV.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-8 inline-flex h-11 items-center justify-center gap-2 rounded-md bg-teal-400 px-4 text-sm font-semibold text-slate-950"
+              >
+                <Download className="h-4 w-4" />
+                Download CV
+              </a>
+
+              <div className="mt-auto pt-10 text-sm text-slate-500">
+                Copyright 2026 CUE
               </div>
             </motion.nav>
           </>

@@ -2,104 +2,94 @@
 
 import { motion } from "framer-motion";
 import AboutModal from "@/components/about-modal";
+import { Code2, Database, Smartphone, Wrench } from "lucide-react";
+
+const strengths = [
+  { title: "Frontend", value: "React, Next.js, TypeScript", icon: Code2 },
+  { title: "Backend", value: "Node.js, Express, PostgreSQL", icon: Database },
+  { title: "Mobile", value: "React Native apps", icon: Smartphone },
+  { title: "Delivery", value: "Debugging, Git, deployment", icon: Wrench },
+];
 
 export default function About() {
   return (
-    <section id="about" className="py-20 px-4 bg-gray-900">
-      <div className="max-w-6xl mx-auto">
-        {/* Section Header */}
+    <section id="about" className="px-4 py-16 md:py-24">
+      <div className="mx-auto max-w-7xl">
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
+          initial={{ opacity: 0, y: 32 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
+          transition={{ duration: 0.7, ease: "easeOut" }}
+          className="mb-10 max-w-3xl md:mb-14"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-center text-transparent bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text mb-12">
+          <p className="mb-3 text-xs font-semibold uppercase tracking-[0.18em] text-teal-300 sm:text-sm">
             About Me
+          </p>
+          <h2 className="text-2xl font-black text-white sm:text-3xl md:text-5xl">
+            I build practical software with clean interfaces and dependable
+            systems behind them.
           </h2>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Image */}
+        <div className="grid items-center gap-12 lg:grid-cols-[0.9fr_1.1fr]">
           <motion.div
-            initial={{ opacity: 0, x: -80 }}
+            initial={{ opacity: 0, x: -60 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
+            transition={{ duration: 0.7, ease: "easeOut" }}
+            className="relative"
           >
-            <div className="relative">
-              <div className="w-full max-w-md mx-auto h-80 bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-2xl flex items-center justify-center border border-gray-700">
-                <img
-                  src="/images/profile.jpg"
-                  alt="Chukwuma Ugwu Emmanuel"
-                  className="w-60 h-72 rounded-xl object-cover border-2 border-gray-600"
-                />
-              </div>
-              <div className="absolute -top-4 -right-4 w-20 h-20 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center">
-                <span className="text-white font-semibold text-sm">3+ YRS</span>
-              </div>
+            <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-2.5 sm:p-4">
+              <img
+                src="/images/profile.jpg"
+                alt="Chukwuma Ugwu Emmanuel"
+                className="aspect-[4/3] w-full rounded-xl object-cover sm:aspect-[5/4]"
+              />
+            </div>
+            <div className="absolute -bottom-6 right-3 rounded-lg border border-teal-300/20 bg-[#0f172a] px-4 py-3 shadow-xl shadow-black/30 sm:right-4 sm:px-5 sm:py-4">
+              <p className="text-xl font-black text-white sm:text-2xl">3+ years</p>
+              <p className="text-xs text-slate-400 sm:text-sm">Building real projects</p>
             </div>
           </motion.div>
 
-          {/* Text */}
           <motion.div
-            initial={{ opacity: 0, x: 80 }}
+            initial={{ opacity: 0, x: 60 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
-            className="space-y-5 text-gray-300"
+            transition={{ duration: 0.7, ease: "easeOut", delay: 0.1 }}
+            className="space-y-6"
           >
-            <h3 className="text-2xl font-bold text-white">
-              Full-Stack & React Native Developer
-            </h3>
-
-            <p className="leading-relaxed text-base">
-              I build fast, responsive, and scalable web applications, focusing
-              on clean user interfaces and efficient backend systems.
-            </p>
-
-            <p className="leading-relaxed text-base">
-              I work with{" "}
-              <span className="text-blue-400 font-medium">
-                React, Next.js, TypeScript, and Tailwind CSS
-              </span>{" "}
-              for frontend development, and{" "}
-              <span className="text-blue-400 font-medium">
-                Node.js, Express, and PostgreSQL
-              </span>{" "}
-              to build APIs, manage data, and power full-stack applications.
-            </p>
-
-            <p className="leading-relaxed text-base">
-              I’ve built dashboards, web apps, and backend systems, and I focus
-              on solving real-world problems, fixing bugs, and delivering
-              reliable products.
-            </p>
-
-            {/* Stats */}
-            <div className="grid grid-cols-2 gap-6 pt-4">
-              {[
-                { title: "Experience", value: "3+ Years" },
-                { title: "Projects", value: "10+ Completed" },
-                { title: "Focus", value: "Full Stack Development" },
-                { title: "Status", value: "Open to Work" },
-              ].map((item, i) => (
-                <motion.div
-                  key={i}
-                  whileHover={{ scale: 1.05 }}
-                  className="bg-gray-800 p-4 rounded-lg border border-gray-700 text-center hover:border-blue-500 hover:shadow-[0_0_15px_rgba(59,130,246,0.3)] transition"
-                >
-                  <h4 className="font-semibold text-blue-400 mb-1 text-sm">
-                    {item.title}
-                  </h4>
-                  <p className="text-gray-200 text-sm">{item.value}</p>
-                </motion.div>
-              ))}
+            <div className="space-y-4 text-sm leading-7 text-slate-300 sm:text-base sm:leading-8">
+              <p>
+                I am a full-stack and React Native developer focused on building
+                fast, responsive, and scalable products. I care about clear user
+                flows, maintainable code, and backend systems that keep the
+                product reliable after launch.
+              </p>
+              <p>
+                I work with React, Next.js, TypeScript, Tailwind CSS, Node.js,
+                Express, and PostgreSQL to ship dashboards, e-commerce projects,
+                APIs, and mobile experiences.
+              </p>
             </div>
 
-            <div className="pt-4">
-              <AboutModal />
+            <div className="grid gap-3 sm:grid-cols-2">
+              {strengths.map((item) => {
+                const Icon = item.icon;
+                return (
+                  <div
+                    key={item.title}
+                    className="rounded-lg border border-white/10 bg-white/[0.04] p-4"
+                  >
+                    <Icon className="mb-4 h-5 w-5 text-teal-300" />
+                    <h3 className="font-semibold text-white">{item.title}</h3>
+                    <p className="mt-1 text-sm text-slate-400">{item.value}</p>
+                  </div>
+                );
+              })}
             </div>
+
+            <AboutModal />
           </motion.div>
         </div>
       </div>
