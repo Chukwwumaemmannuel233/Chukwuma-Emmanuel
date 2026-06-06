@@ -144,7 +144,7 @@ export default function Hero() {
           <div className="absolute -inset-2 rounded-3xl border border-teal-300/20 sm:-inset-4 sm:rounded-[2rem]" />
           <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.04] p-2.5 shadow-2xl shadow-black/40 sm:rounded-[2rem] sm:p-4">
             <img
-              src="/images/profile.jpg"
+              src="/images/profile.jpeg"
               alt="Chukwuma Ugwu Emmanuel"
               className="aspect-[4/4.7] w-full rounded-2xl object-cover sm:aspect-[4/5]"
             />

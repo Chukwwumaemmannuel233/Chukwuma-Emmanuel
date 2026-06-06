@@ -41,7 +41,7 @@ export default function About() {
           >
             <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-2.5 sm:p-4">
               <img
-                src="/images/profile.jpg"
+                src="/images/profile.jpeg"
                 alt="Chukwuma Ugwu Emmanuel"
                 className="aspect-[4/3] w-full rounded-xl object-cover sm:aspect-[5/4]"
               />
