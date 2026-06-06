@@ -104,7 +104,7 @@ export default function Header() {
         </nav>
 
         <a
-          href="/Chukwuma-Emmanuel-CV.pdf"
+          href="/Chukwuma_Ugwu_CV.pdf"
           target="_blank"
           rel="noopener noreferrer"
           className="hidden h-10 items-center gap-2 rounded-md bg-teal-400 px-4 text-sm font-semibold text-slate-950 transition hover:bg-teal-300 lg:inline-flex"
