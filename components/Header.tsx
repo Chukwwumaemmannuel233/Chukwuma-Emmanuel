@@ -181,7 +181,7 @@ export default function Header() {
                 </div>
 
                 <a
-                  href="/Chukwuma-Emmanuel-CV.pdf"
+                  href="/Chukwuma-Ugwu-CV.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="mt-8 inline-flex h-11 items-center justify-center gap-2 rounded-md bg-teal-400 px-4 text-sm font-semibold text-slate-950"

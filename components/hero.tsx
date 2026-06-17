@@ -98,7 +98,7 @@ export default function Hero() {
             <Button
               size="lg"
               className="w-full border border-white/15 bg-white/5 text-white hover:bg-white/10 sm:w-auto"
-              onClick={() => window.open("/Chukwuma-Emmanuel-CV.pdf", "_blank")}
+              onClick={() => window.open("/Chukwuma-Ugwu-CV.pdf", "_blank")}
             >
               <Download className="h-4 w-4" />
               Download CV
