@@ -9,9 +9,11 @@ import {
   ArrowDown,
   Download,
   ExternalLink,
+  QrCode,
 } from "lucide-react";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
+import CoverLetterQR from "@/components/qr-code";
 
 const words = [
   "Full-Stack Developer",
@@ -25,6 +27,7 @@ export default function Hero() {
   const [index, setIndex] = useState(0);
   const [subIndex, setSubIndex] = useState(0);
   const [deleting, setDeleting] = useState(false);
+  const [showQR, setShowQR] = useState(false);
 
   useEffect(() => {
     const timeout = setTimeout(
@@ -42,12 +45,12 @@ export default function Hero() {
       },
       deleting ? 60 : 120,
     );
-
     return () => clearTimeout(timeout);
   }, [subIndex, deleting, index]);
 
   return (
     <section className="relative overflow-hidden px-4 pb-12 pt-24 sm:px-6 sm:pb-16 sm:pt-28 lg:min-h-screen">
+      {/* Backgrounds */}
       <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(20,184,166,0.12),transparent_32%),linear-gradient(180deg,#080b12_0%,#0f172a_72%,#080b12_100%)]" />
       <div className="absolute inset-0 opacity-[0.08] [background-image:linear-gradient(rgba(255,255,255,.35)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.35)_1px,transparent_1px)] [background-size:44px_44px]" />
 
@@ -57,6 +60,7 @@ export default function Hero() {
         transition={{ duration: 1 }}
         className="relative z-10 mx-auto grid max-w-7xl items-center gap-8 text-center sm:gap-10 lg:grid-cols-[1.1fr_.9fr] lg:text-left"
       >
+        {/* ── LEFT COLUMN ── */}
         <div>
           <div className="mb-5 inline-flex max-w-full items-center rounded-full border border-teal-300/20 bg-teal-300/10 px-3 py-2 text-xs font-medium text-teal-200 sm:mb-6 sm:px-4 sm:text-sm">
             Available for freelance and full-time roles
@@ -81,6 +85,7 @@ export default function Hero() {
             Node.js, Tailwind CSS, and PostgreSQL.
           </p>
 
+          {/* CTA Buttons */}
           <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:justify-center lg:justify-start">
             <Button
               size="lg"
@@ -105,6 +110,7 @@ export default function Hero() {
             </Button>
           </div>
 
+          {/* Stats */}
           <div className="mx-auto mt-7 grid max-w-md grid-cols-3 gap-2 sm:mt-10 sm:max-w-xl sm:gap-3 lg:mx-0">
             {[
               ["3+", "Years"],
@@ -121,7 +127,8 @@ export default function Hero() {
             ))}
           </div>
 
-          <div className="mt-7 flex justify-center gap-3 sm:mt-10 lg:justify-start">
+          {/* Socials + QR trigger */}
+          <div className="mt-7 flex items-center justify-center gap-3 sm:mt-10 lg:justify-start">
             <Social href="https://github.com/Chukwwumaemmannuel233" label="GitHub">
               <Github className="h-5 w-5" />
             </Social>
@@ -137,9 +144,70 @@ export default function Hero() {
             <Social href="tel:+2348161770490" label="Phone">
               <Phone className="h-5 w-5" />
             </Social>
+
+            {/* Divider */}
+            <div className="h-6 w-px bg-white/10" />
+
+            {/* QR trigger button */}
+            <div className="relative">
+              <button
+                onClick={() => setShowQR((v) => !v)}
+                aria-label="Scan cover letter QR code"
+                title="Scan to view Cover Letter"
+                className="grid h-10 w-10 place-items-center rounded-lg border border-teal-300/40 bg-teal-300/10 text-teal-300 transition hover:border-teal-300/80 hover:bg-teal-300/20 sm:h-11 sm:w-11"
+              >
+                <QrCode className="h-5 w-5" />
+              </button>
+
+              {/* QR Popover */}
+              {showQR && (
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.9, y: 8 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  exit={{ opacity: 0, scale: 0.9 }}
+                  transition={{ duration: 0.2 }}
+                  className="absolute bottom-14 left-1/2 z-50 -translate-x-1/2 lg:left-0 lg:translate-x-0"
+                >
+                  <div className="relative rounded-xl border border-teal-300/20 bg-[#0f172a] p-4 shadow-2xl shadow-black/60 w-52">
+                    {/* top gold bar */}
+                    <div className="absolute top-0 left-0 right-0 h-1 rounded-t-xl bg-gradient-to-r from-teal-400 to-teal-600" />
+
+                    <p className="mb-3 text-center text-xs font-semibold text-teal-300 tracking-wider uppercase">
+                      Scan Cover Letter
+                    </p>
+
+                    {/* QR Code */}
+                    <div className="flex items-center justify-center rounded-lg bg-white p-3">
+                      <CoverLetterQR />
+                    </div>
+
+                    <p className="mt-3 text-center text-[10px] text-slate-400 leading-relaxed">
+                      Scan with your phone camera to view my cover letter
+                    </p>
+
+                    <a
+                      href="/cover-letter"
+                      className="mt-3 flex items-center justify-center gap-1 rounded-lg border border-teal-300/20 bg-teal-300/10 py-2 text-xs font-medium text-teal-300 transition hover:bg-teal-300/20"
+                    >
+                      <ExternalLink className="h-3 w-3" />
+                      Open directly
+                    </a>
+
+                    {/* close hint */}
+                    <button
+                      onClick={() => setShowQR(false)}
+                      className="absolute -top-2 -right-2 grid h-5 w-5 place-items-center rounded-full bg-slate-700 text-slate-300 text-xs hover:bg-slate-600"
+                    >
+                      ×
+                    </button>
+                  </div>
+                </motion.div>
+              )}
+            </div>
           </div>
         </div>
 
+        {/* ── RIGHT COLUMN — Profile Image ── */}
         <div className="relative mx-auto w-full max-w-[19rem] sm:max-w-md">
           <div className="absolute -inset-2 rounded-3xl border border-teal-300/20 sm:-inset-4 sm:rounded-[2rem]" />
           <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.04] p-2.5 shadow-2xl shadow-black/40 sm:rounded-[2rem] sm:p-4">

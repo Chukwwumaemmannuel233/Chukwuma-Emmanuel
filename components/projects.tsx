@@ -45,6 +45,16 @@ const projects = [
     status: "In Progress",
     liveUrl: "https://kudora.vercel.app",
   },
+  {
+    title: "Uche's GadgetsHub",
+    description:
+      "An e-commerce platform for buying and selling products with a secure shopping flow.",
+    image: "/images/uche-gadgetsHub.png",
+    tech: ["Next.js", "TypeScript", "Prisma", "Node.js", "PostgreSQL"],
+    category: "Web Platform",
+    status: "In Progress",
+    liveUrl: "https://kudora.vercel.app",
+  },
 ];
 
 export default function Projects() {
