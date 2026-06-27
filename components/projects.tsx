@@ -50,10 +50,10 @@ const projects = [
     description:
       "An e-commerce platform for buying and selling products with a secure shopping flow.",
     image: "/images/uche-gadgetsHub.png",
-    tech: ["Next.js", "TypeScript", "Prisma", "Node.js", "PostgreSQL"],
-    category: "Web Platform",
-    status: "In Progress",
-    liveUrl: "https://kudora.vercel.app",
+    tech: ["Next.js", "TypeScript", "Prisma", "PostgreSQL"],
+    category: "E-commerce",
+    status: "Completed",
+    liveUrl: "https://chukwuma-emmanuel-seven.vercel.app/",
   },
 ];
 
