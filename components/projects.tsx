@@ -53,7 +53,7 @@ const projects = [
     tech: ["Next.js", "TypeScript", "Prisma", "PostgreSQL"],
     category: "E-commerce",
     status: "Completed",
-    liveUrl: "https://chukwuma-emmanuel-seven.vercel.app/",
+    liveUrl: "https://uche-s.vercel.app/",
   },
 ];
 
