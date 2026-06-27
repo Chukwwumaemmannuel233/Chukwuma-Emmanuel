@@ -10,9 +10,10 @@ import {
   Download,
   ExternalLink,
   QrCode,
+  X,
 } from "lucide-react";
-import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
 import CoverLetterQR from "@/components/qr-code";
 
 const words = [
@@ -29,6 +30,10 @@ export default function Hero() {
   const [deleting, setDeleting] = useState(false);
   const [showQR, setShowQR] = useState(false);
 
+  // ref wraps the button + popover together
+  const qrWrapperRef = useRef<HTMLDivElement>(null);
+
+  // Typewriter
   useEffect(() => {
     const timeout = setTimeout(
       () => {
@@ -48,9 +53,29 @@ export default function Hero() {
     return () => clearTimeout(timeout);
   }, [subIndex, deleting, index]);
 
+  // Click outside to close
+  useEffect(() => {
+    if (!showQR) return;
+    function onClickOutside(e: MouseEvent) {
+      if (
+        qrWrapperRef.current &&
+        !qrWrapperRef.current.contains(e.target as Node)
+      ) {
+        setShowQR(false);
+      }
+    }
+    // small delay so the toggle click doesn't immediately close
+    const timer = setTimeout(() => {
+      document.addEventListener("mousedown", onClickOutside);
+    }, 50);
+    return () => {
+      clearTimeout(timer);
+      document.removeEventListener("mousedown", onClickOutside);
+    };
+  }, [showQR]);
+
   return (
     <section className="relative overflow-hidden px-4 pb-12 pt-24 sm:px-6 sm:pb-16 sm:pt-28 lg:min-h-screen">
-      {/* Backgrounds */}
       <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(20,184,166,0.12),transparent_32%),linear-gradient(180deg,#080b12_0%,#0f172a_72%,#080b12_100%)]" />
       <div className="absolute inset-0 opacity-[0.08] [background-image:linear-gradient(rgba(255,255,255,.35)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.35)_1px,transparent_1px)] [background-size:44px_44px]" />
 
@@ -80,8 +105,8 @@ export default function Hero() {
           </h2>
 
           <p className="mx-auto mt-5 max-w-2xl text-sm leading-7 text-slate-300 sm:text-base md:text-lg lg:mx-0 lg:leading-8">
-            I turn complex ideas into reliable interfaces, APIs, dashboards,
-            and production-ready applications using React, Next.js, TypeScript,
+            I turn complex ideas into reliable interfaces, APIs, dashboards, and
+            production-ready applications using React, Next.js, TypeScript,
             Node.js, Tailwind CSS, and PostgreSQL.
           </p>
 
@@ -121,13 +146,15 @@ export default function Hero() {
                 key={label}
                 className="rounded-lg border border-white/10 bg-white/[0.04] p-3 sm:p-4"
               >
-                <p className="text-xl font-bold text-white sm:text-2xl">{value}</p>
+                <p className="text-xl font-bold text-white sm:text-2xl">
+                  {value}
+                </p>
                 <p className="text-xs text-slate-400 sm:text-sm">{label}</p>
               </div>
             ))}
           </div>
 
-          {/* Socials + QR trigger */}
+          {/* Socials + QR */}
           <div className="mt-7 flex items-center justify-center gap-3 sm:mt-10 lg:justify-start">
             <Social href="https://github.com/Chukwwumaemmannuel233" label="GitHub">
               <Github className="h-5 w-5" />
@@ -148,61 +175,100 @@ export default function Hero() {
             {/* Divider */}
             <div className="h-6 w-px bg-white/10" />
 
-            {/* QR trigger button */}
-            <div className="relative">
+            {/* QR trigger + popover — wrapped in single ref div */}
+            <div className="relative" ref={qrWrapperRef}>
               <button
                 onClick={() => setShowQR((v) => !v)}
                 aria-label="Scan cover letter QR code"
                 title="Scan to view Cover Letter"
-                className="grid h-10 w-10 place-items-center rounded-lg border border-teal-300/40 bg-teal-300/10 text-teal-300 transition hover:border-teal-300/80 hover:bg-teal-300/20 sm:h-11 sm:w-11"
+                className={`grid h-10 w-10 place-items-center rounded-lg border transition-all duration-200 sm:h-11 sm:w-11 ${
+                  showQR
+                    ? "border-teal-300/80 bg-teal-300/20 text-teal-200"
+                    : "border-teal-300/40 bg-teal-300/10 text-teal-300 hover:border-teal-300/80 hover:bg-teal-300/20"
+                }`}
               >
                 <QrCode className="h-5 w-5" />
               </button>
 
-              {/* QR Popover */}
-              {showQR && (
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.9, y: 8 }}
-                  animate={{ opacity: 1, scale: 1, y: 0 }}
-                  exit={{ opacity: 0, scale: 0.9 }}
-                  transition={{ duration: 0.2 }}
-                  className="absolute bottom-14 left-1/2 z-50 -translate-x-1/2 lg:left-0 lg:translate-x-0"
-                >
-                  <div className="relative rounded-xl border border-teal-300/20 bg-[#0f172a] p-4 shadow-2xl shadow-black/60 w-52">
-                    {/* top gold bar */}
-                    <div className="absolute top-0 left-0 right-0 h-1 rounded-t-xl bg-gradient-to-r from-teal-400 to-teal-600" />
+              <AnimatePresence>
+                {showQR && (
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.94, y: 10 }}
+                    animate={{ opacity: 1, scale: 1, y: 0 }}
+                    exit={{ opacity: 0, scale: 0.94, y: 10 }}
+                    transition={{ duration: 0.18, ease: "easeOut" }}
+                    className="absolute bottom-14 z-50 right-0 left-auto w-60 sm:left-1/2 sm:-translate-x-1/2 sm:right-auto lg:left-0 lg:translate-x-0"
+                  >
+                    {/* Caret arrow */}
+                    <div className="absolute -bottom-[7px] right-4 h-3 w-3 rotate-45 border-b border-r border-white/10 bg-[#0f172a] sm:left-1/2 sm:-translate-x-1/2 sm:right-auto lg:left-5 lg:translate-x-0" />
 
-                    <p className="mb-3 text-center text-xs font-semibold text-teal-300 tracking-wider uppercase">
-                      Scan Cover Letter
-                    </p>
+                    <div className="w-56 sm:w-60 overflow-hidden rounded-2xl border border-white/10 bg-[#0f172a] shadow-2xl shadow-black/70">
 
-                    {/* QR Code */}
-                    <div className="flex items-center justify-center rounded-lg bg-white p-3">
-                      <CoverLetterQR />
+                      {/* ── Header ── */}
+                      <div className="flex items-center justify-between border-b border-white/10 bg-gradient-to-r from-teal-500/10 to-transparent px-4 py-3">
+                        <div className="flex items-center gap-2">
+                          <div className="grid h-6 w-6 place-items-center rounded-md bg-teal-400/20">
+                            <QrCode className="h-3.5 w-3.5 text-teal-300" />
+                          </div>
+                          <div>
+                            <p className="text-xs font-semibold text-white leading-none">
+                              Cover Letter
+                            </p>
+                            <p className="text-[10px] text-slate-500 mt-0.5">
+                              Scan or open directly
+                            </p>
+                          </div>
+                        </div>
+                        <button
+                          onClick={() => setShowQR(false)}
+                          className="grid h-6 w-6 place-items-center rounded-md text-slate-500 transition hover:bg-white/10 hover:text-slate-300"
+                        >
+                          <X className="h-3.5 w-3.5" />
+                        </button>
+                      </div>
+
+                      {/* ── QR Code ── */}
+                      <div className="flex flex-col items-center gap-4 p-4">
+                        {/* QR frame */}
+                        <div className="relative rounded-xl bg-white p-3 shadow-lg">
+                          {/* corner accents */}
+                          <div className="absolute top-1.5 left-1.5 h-4 w-4 border-t-2 border-l-2 border-teal-500 rounded-tl-sm" />
+                          <div className="absolute top-1.5 right-1.5 h-4 w-4 border-t-2 border-r-2 border-teal-500 rounded-tr-sm" />
+                          <div className="absolute bottom-1.5 left-1.5 h-4 w-4 border-b-2 border-l-2 border-teal-500 rounded-bl-sm" />
+                          <div className="absolute bottom-1.5 right-1.5 h-4 w-4 border-b-2 border-r-2 border-teal-500 rounded-br-sm" />
+                          <CoverLetterQR />
+                        </div>
+
+                        {/* Label */}
+                        <div className="text-center">
+                          <p className="text-xs font-medium text-slate-300">
+                            Point your camera here
+                          </p>
+                          <p className="text-[11px] text-slate-500 mt-0.5">
+                            to view my cover letter
+                          </p>
+                        </div>
+
+                        {/* Divider */}
+                        <div className="flex w-full items-center gap-2">
+                          <div className="h-px flex-1 bg-white/10" />
+                          <span className="text-[10px] text-slate-600 uppercase tracking-wider">or</span>
+                          <div className="h-px flex-1 bg-white/10" />
+                        </div>
+
+                        {/* Open directly */}
+                        <a
+                          href="/cover-letter"
+                          className="flex w-full items-center justify-center gap-2 rounded-xl border border-teal-300/25 bg-teal-300/10 py-2.5 text-xs font-semibold text-teal-300 transition hover:bg-teal-300/20 hover:border-teal-300/50"
+                        >
+                          <ExternalLink className="h-3.5 w-3.5" />
+                          Open Cover Letter
+                        </a>
+                      </div>
                     </div>
-
-                    <p className="mt-3 text-center text-[10px] text-slate-400 leading-relaxed">
-                      Scan with your phone camera to view my cover letter
-                    </p>
-
-                    <a
-                      href="/cover-letter"
-                      className="mt-3 flex items-center justify-center gap-1 rounded-lg border border-teal-300/20 bg-teal-300/10 py-2 text-xs font-medium text-teal-300 transition hover:bg-teal-300/20"
-                    >
-                      <ExternalLink className="h-3 w-3" />
-                      Open directly
-                    </a>
-
-                    {/* close hint */}
-                    <button
-                      onClick={() => setShowQR(false)}
-                      className="absolute -top-2 -right-2 grid h-5 w-5 place-items-center rounded-full bg-slate-700 text-slate-300 text-xs hover:bg-slate-600"
-                    >
-                      ×
-                    </button>
-                  </div>
-                </motion.div>
-              )}
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
           </div>
         </div>
@@ -219,7 +285,8 @@ export default function Hero() {
             <div className="absolute bottom-5 left-5 right-5 rounded-lg border border-white/10 bg-[#080b12]/85 p-3 text-left backdrop-blur sm:bottom-8 sm:left-8 sm:right-8 sm:p-4">
               <p className="text-xs text-slate-400 sm:text-sm">Current focus</p>
               <p className="mt-1 text-sm font-semibold text-white sm:text-base">
-                Building scalable products with clean UI and dependable backend systems.
+                Building scalable products with clean UI and dependable backend
+                systems.
               </p>
             </div>
           </div>
